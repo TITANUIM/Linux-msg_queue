@@ -6,9 +6,9 @@ int server_type = 1;
 int client_type = 2;
 
 
-static int comm_msg_queue(int flags)
+static int comm_msg_queue(int flags) //生成新消息队列或者取得已存在的消息队列
 {
-	key_t _key = ftok(_PATH_NAME_,_PROJ_ID_);
+	key_t _key = ftok(_PATH_NAME_,_PROJ_ID_); 
 	if(_key < 0)
 	{
 		printf("%d : %s",errno,strerror(errno));
@@ -20,19 +20,19 @@ static int comm_msg_queue(int flags)
 	return msg_id;
 }
 
-int creat_msg_queue()
+int creat_msg_queue()  //创建
 {
 	int flags = IPC_CREAT | IPC_EXCL | 0666;
 	return comm_msg_queue(flags);
 }
 
-int get_msg_queue()
+int get_msg_queue() //获取
 {
 	int flags = IPC_CREAT;
 	return comm_msg_queue(flags);
 }
 
-int destroy_queue(int msg_id)
+int destroy_queue(int msg_id) //销毁
 {
 	if(msgctl(msg_id,IPC_RMID,NULL) != 0)
 	{
@@ -43,7 +43,7 @@ int destroy_queue(int msg_id)
 	return 0;
 }
 
-int send_msg(int msg_id,int send_type,const char* msg)
+int send_msg(int msg_id,int send_type,const char* msg) //发送
 {
 	struct msgbuf _buf;
 	_buf.mtype = send_type;
@@ -57,7 +57,7 @@ int send_msg(int msg_id,int send_type,const char* msg)
 	return 0;
 }
 
-int recv_msg(int msg_id,int recv_type,char* msg_out)
+int recv_msg(int msg_id,int recv_type,char* msg_out) //接收
 {
 	struct msgbuf _buf;
 	_buf.mtype = 0;
