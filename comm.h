@@ -23,11 +23,11 @@ struct msgbuf
 	char mtext[_SIZE_];
 };
 
-int creat_msg_queue();
-int get_msg_queue();
-//int creat_msg_queue(int msg_id);
-int send_msg(int msg_id,int send_type,const char* msg);
-int recv_msg(int msg_id,int recv_type,char* msg_out);
-int destroy_queue(int msg_id);
+int creat_msg_queue(); // 创建消息队列
+int get_msg_queue(); // 获取
+//int creat_msg_queue(int msg_id); 
+int send_msg(int msg_id,int send_type,const char* msg);  // 发送消息
+int recv_msg(int msg_id,int recv_type,char* msg_out); // 接收消息
+int destroy_queue(int msg_id); // 销毁消息队列
 
 
